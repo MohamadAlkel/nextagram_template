@@ -1,6 +1,6 @@
 import os
 import config
-from flask import Flask
+from flask import Flask,send_from_directory
 from models.base_model import db
 from flask_login import LoginManager
 
@@ -27,3 +27,4 @@ def _db_close(exc):
         print(db)
         print(db.close())
     return exc
+

@@ -12,3 +12,36 @@
     justify-content: flex-end;
 }
 
+
+.card-body{
+    margin: 20px;
+    padding: 20px;
+}
+
+.card{
+    margin: auto;
+    max-width: 90%;
+}
+
+div.card{
+    background-color: #417e792e;
+}
+
+
+
+
+.img{
+    
+    margin: 10px;
+    position: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    
+}
+
+
+div.card-body{
+    padding: 0;
+    
+}
+

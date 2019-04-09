@@ -7,6 +7,8 @@ class User(BaseModel, UserMixin):
     username = pw.CharField(unique=True, null=True)
     email = pw.CharField(unique=True, null=True)
     password = pw.CharField(unique=False, null=True) 
+    img = pw.CharField(unique=False, null=True)
+    private = pw.BooleanField(unique=False, default=False)  
 
     def validate(self):
         duplicate_username = User.get_or_none(User.username == self.username)
@@ -15,13 +17,26 @@ class User(BaseModel, UserMixin):
         check_password = re.search("(?=.{8,})", self.password)
 
         # email_v = User.get_or_none( == self.email)
-        {duplicate_username and self.errors.append("username is not unique")}
+        {duplicate_username and not duplicate_username.id == self.id and self.errors.append("username is not unique")}
         {duplicate_email and not duplicate_email.id == self.id and self.errors.append("email is not unique")}
         {not check_email and self.errors.append("email is not real")}
         {not check_password and self.errors.append("password should be more than 6 ")}
         
         
-        # if duplicate_username :
-        #     self.errors.append("username is not unique")
-        # elif  not check_email :  
-        #     self.errors.append("email is not unique")
+        
+
+
+
+
+class User_img(BaseModel):
+    user = pw.ForeignKeyField(User, backref='user_img')
+    img = pw.CharField(unique=False, null=True) 
+
+
+class Donation(BaseModel):
+    user_img = pw.ForeignKeyField(User_img, backref='donation')
+    amount = pw.DecimalField(unique=False, null=True) 
+    user = pw.CharField(unique=False, null=True) 
+   
+     
+

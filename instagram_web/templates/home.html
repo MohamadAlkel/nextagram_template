@@ -6,4 +6,32 @@
 {% endblock %}
 {% block content %}
 <h1>Homepage</h1>
-{% endblock %}
+
+
+{%for user in users%}
+  {%if user.private == False:%}
+  
+    <div class="card text-white bg-secondary mb-3" >
+      <div class="card-header"><img src="/users/image/{{user.img}}" class="rounded float-left" height="50px" ><h3>{{user.username}}</h3></div>
+      <div class="card-body">
+        <div class="card-columns">
+        {%for imge in user.user_img%}
+            <div class="card " style="width: 18rem;">
+                <img src="/users/image/{{imge.img}}" class="card-img-top"  >
+                <div class="card-body"> 
+                   <!-- {{current_user.id}} -->
+                  {%if current_user.id:%}               
+                    <a href="{{ url_for("payments.client_token", img_id =imge.id, user_id=user.id) }}" class="btn btn-dark"> donate</a>
+                  {%else:%}
+                    <a  class="btn btn-dark"> donate</a>
+                  {%endif%}
+                </div>
+              </div>
+              {%endfor%}
+            </div>  
+      </div>
+    </div> 
+  {%endif%}  
+{%endfor%}
+
+{% endblock %}user_img
