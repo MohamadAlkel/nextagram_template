@@ -1,0 +1,38 @@
+{% extends "_layout.html" %}
+{% block title %}
+  Homepage
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<!-- <h3>WELCOME TO NEXTAGRAM!!!</h3> -->
+<h4>Sign in </h4>
+<br/>
+
+<form action={{url_for('sessions.google_sign_in')}} method="POST">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Google ">
+</form>
+
+<form action={{ url_for("sessions.login") }} method="POST">
+    
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <div class="form-group">
+      <label for="username">Username Or Email:</label> <input class="form-control" id="username" name="username" type="text" value={{username}}>
+    </div>
+   
+    <div class="form-group">
+      <label for="password">Password:</label> <input class="form-control" id="password" name="password" type="password" value={{password}}>
+    </div>
+
+    
+    <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Sign up">
+    {%for error in errors%}
+    <h6>{{error}} </h6>
+    {%endfor%} 
+    <p>{{no}}</p>   
+    
+  </form>
+
+  
+  {% endblock %}
